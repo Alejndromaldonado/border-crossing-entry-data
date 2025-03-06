@@ -30,9 +30,13 @@ st.sidebar.markdown("")
 st.sidebar.markdown("""
 Created by:  
 **Alejandro Maldonado**  
-_Data Analyst_  
-[LinkedIn](https://www.linkedin.com/in/alejandromaldonadod4t4/)   
+_Data Analyst_
                     """)
+st.sidebar.markdown("""
+    <a href="https://www.linkedin.com/in/alejandromaldonadod4t4/" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" width="20" height="20">
+</a>""", unsafe_allow_html=True
+)
 
 # Filtrar datos
 df_filtered = df[(df["Year"] >= selected_years[0]) & (df["Year"] <= selected_years[1]) & (df["Border"].isin(selected_border))]
