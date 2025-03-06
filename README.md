@@ -1,5 +1,5 @@
 # Border Crossing Data Dashboard
-![Dashboard]("assets/logo_usa.png")  
+![Dashboard](https://github.com/Alejndromaldonado/border-crossing-entry-data/blob/main/assets/logo_usa.png?raw=true)  
 
 📊 **Border Crossing Data Dashboard** es una aplicación interactiva desarrollada con **Streamlit** y **Plotly** que permite analizar el tráfico de cruces fronterizos en EE.UU. 
 
@@ -7,7 +7,6 @@
 - **Visualización interactiva**: Gráficos dinámicos con filtrado en tiempo real.
 - **Mapa geoespacial**: Distribución del tráfico por ubicación.
 - **Filtros avanzados**: Selección por año y frontera.
-- **Diseño minimalista**: Enfoque intuitivo y colores inspirados en EE.UU.
 
 ## 🛠 Tecnologías
 - **Python**
@@ -16,7 +15,7 @@
 - **Plotly**
 
 ## Enlace al Dashboard
-![Dashboard]("assets/dashb.png")  
+![Dashboard](https://github.com/Alejndromaldonado/border-crossing-entry-data/blob/main/assets/dashb.png?raw=true)  
 [Border Crossing Entry](https://border-crossing-entry-data-ekdpfbdmviordhpnxcbfbo.streamlit.app/) 
 
 
