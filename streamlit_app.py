@@ -114,6 +114,20 @@ col3.markdown(
     unsafe_allow_html=True
 )
 
+color_map_general = {
+    "Personal Vehicle Passengers": "#A9A9A9",  # Rojo vibrante
+    "Personal Vehicles": "#008000",  # Verde fuerte
+    "Pedestrians": "#0056B3",  # Azul profundo
+    "Trucks": "#FF8C00",  # Naranja oscuro
+    "Truck Containers Loaded": "#C21807",  # Rojo intenso
+    "Bus Passengers": "#9ACD32",  # Verde esmeralda
+    "Truck Containers Empty": "#A9359A",  # Marrón rojizo
+    "Rail Containers Loaded": "#FFD700",  # Amarillo dorado
+    "Rail Containers Empty": "#4B0082",  # Índigo oscuro
+    "Buses": "#4682B4",  # Azul acero
+    "Train Passengers": "#696969",  # Gris oscuro
+    "Trains": "#696900"  # Negro grisáceo
+}
 
 # Gráfico 1 - Mapa de tráfico
 geo_transport = df_filtered.groupby(["State", "Measure", "Latitude", "Longitude"])["Value"].sum().reset_index()
@@ -128,9 +142,11 @@ fig1 = px.scatter_map(geo_transport,
                      zoom=2,
                      title="Geographic Distribution of Traffic by Type of Transport",
                      map_style="carto-darkmatter",
-                     color_discrete_sequence=px.colors.qualitative.Bold,
+                     color_discrete_map=color_map_general,
                      )
 st.plotly_chart(fig1, use_container_width=True)
+
+color_map = {"US-Mexico Border": "green", "US-Canada Border": "red"}
 
 # Gráfico 2 - Tendencia durante los años
 year_count = df_filtered.groupby(["Year", "Border"])["Value"].sum().reset_index(name="Value").sort_values(by="Year", ascending=False)
@@ -139,7 +155,7 @@ fig2 = px.line(year_count,
                 x="Year", 
                 y="Value", 
                 color="Border",
-                color_discrete_sequence=px.colors.qualitative.Bold,
+                color_discrete_map=color_map,
                 title=f"Records between {selected_years[0]}-{selected_years[1]}")
 
 fig2.update_layout(
@@ -156,11 +172,12 @@ month_count = df_filtered.groupby(["Month", "Border"])["Value"].sum().reset_inde
 dict_meses = {1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June", 7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December"}
 month_count["Month"] = month_count["Month"].map(dict_meses)
 
+
 fig3 = px.line(month_count, 
                 x="Month", 
                 y="Value", 
                 color="Border",
-                color_discrete_sequence=px.colors.qualitative.Bold,
+                color_discrete_map=color_map,
                 title=f"Monthly trend of border crossing {selected_years[0]}-{selected_years[1]}")
 fig3.update_layout(
     paper_bgcolor="White",
@@ -182,7 +199,7 @@ fig4 = px.bar(most_congested_ports,
             x="Port Name", 
             y="Value", 
             color="Measure", 
-            color_discrete_sequence=px.colors.qualitative.Bold,
+            color_discrete_map=color_map_general,
             title=f"Ports of Entry with the Highest Traffic Flow by Mode of Transport <br> {selected_years[0]}-{selected_years[1]}",)
 fig4.update_layout(
     paper_bgcolor="White",
@@ -191,6 +208,8 @@ fig4.update_layout(
 )
 
 # Gráfico 5 - Evolución de cruces por año
+color_map_trucks = {"Trucks": "#FF8C00", "Truck Containers Empty": "#A9359A", "Truck Containers Loaded": "#C21807"}
+
 filter_trucks = df_filtered[df_filtered["Measure"].isin(["Trucks", "Truck Containers Empty", "Truck Containers Loaded"])]
 trucks_count = filter_trucks.groupby(["Year", "Border", "Measure"])["Value"].sum().reset_index(name="Value").sort_values(by="Year", ascending=False)
 fig5 = px.line(trucks_count, 
@@ -198,7 +217,7 @@ fig5 = px.line(trucks_count,
                 y="Value", 
                 color="Measure",
                 facet_col="Border",
-                color_discrete_sequence=px.colors.qualitative.Bold,
+                color_discrete_map=color_map_trucks,
                 title=f"Evolution of truck traffic between {selected_years[0]}-{selected_years[1]}")
 fig5.update_layout(
     paper_bgcolor="White",
